@@ -46,11 +46,12 @@ The `main.py` file has a global variable `SPRINT`. You should set this variable 
 - [ ] The html_table() function correctly returns an HTML table representation of the DataFrame, or None if the collection is empty.
 
 ### 3. Security
-- [ ] The database URL is stored in an environment variable and is not hardcoded into the component.
+- [x] The database URL is stored in an environment variable and is not hardcoded into the component.
 - [ ] The TLS certificate authority file is properly configured and used to establish a secure connection to the database.
 
 ### 4. Documentation & Style
 - [ ] The code includes docstrings explaining the purpose and behavior of each component.
+- [ ] The code includes no extraneous comments and no inline print statements.
 - [ ] The code includes no extraneous comments and no inline print statements.
 - [ ] The code follows PEP style guide.
 
