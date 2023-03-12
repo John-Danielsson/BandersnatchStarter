@@ -32,10 +32,10 @@ Once you have completed all prerequisites, you will need to create a database in
 The `main.py` file has a global variable `SPRINT`. You should set this variable to an integer value that represents what sprint you're currently working on. When you first clone the project this is set to 0. This keeps unimplemented features that you haven't encountered yet from causing issues before you're ready for them. Set `SPRINT` to 1 before you begin coding, then increment it as you progress through the Sprints.
 
 ### 1. Database Setup
-- [ ] Signup for a MongoDB account: [MongoDB](https://account.mongodb.com)
-- [ ] Create a "Shared Cluster" (free tier)
-- [ ] Add your IP address to the allowed locales list
-- [ ] Copy the connection string into a `.env` file
+- [x] Signup for a MongoDB account: [MongoDB](https://account.mongodb.com)
+- [x] Create a "Shared Cluster" (free tier)
+- [x] Add your IP address to the allowed locales list
+- [x] Copy the connection string into a `.env` file
     - `DB_URL=mongodb+srv://<username>:<password>@<cluster>.<project_id>.mongodb.net`
 
 ### 2. Functionality
