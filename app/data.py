@@ -8,18 +8,46 @@ from pymongo import MongoClient
 
 
 class Database:
+    """
+    Initializes the Database using a dictionary
+    with which to make a MongoDB database, a DataFrame,
+    or an HTML table.
+    """
+    def __init__(self):
+        self.columns = [
+            'Name', 'Type', 'Level',
+            'Rarity', 'Damage', 'Health',
+            'Energy', 'Sanity', 'Timestamp'
+        ]
+        self.df = {column:[] for column in self.columns}
 
+    """Inserts the specified number of documents, 'amount', into the collection."""
     def seed(self, amount):
-        pass
+        for i in range(amount):
+            monster = Monster()
+            self.df['Name'].append(monster.name)
+            self.df['Type'].append(monster.type)
+            self.df['Level'].append(monster.level)
+            self.df['Rarity'].append(monster.rarity)
+            self.df['Damage'].append(monster.damage)
+            self.df['Health'].append(monster.health)
+            self.df['Energy'].append(monster.energy)
+            self.df['Sanity'].append(monster.sanity)
+            self.df['Timestamp'].append(monster.timestamp)
 
+    """Deletes all documents in the collection."""
     def reset(self):
-        pass
+        for key in self.df.keys():
+            self.df[key] = []
 
+    """Returns the number of documents in the collection."""
     def count(self) -> int:
-        pass
+        return len(self.df['Name'])
 
+    """Returns a pandas DataFrame representation of all the documents in the collection."""
     def dataframe(self) -> DataFrame:
-        pass
+        return DataFrame(data=self.df, columns=self.columns)
 
+    """Returns an HTML table representation of all the documents in the collection."""
     def html_table(self) -> str:
-        pass
+        return self.dataframe().to_html()
