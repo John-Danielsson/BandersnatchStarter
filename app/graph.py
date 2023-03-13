@@ -8,7 +8,6 @@ def chart(df: DataFrame, x: str, y: str, target: str) -> Chart:
     return Chart(
         data=df,
         description='Data visualization of Bandersnatch data with an Altair Chart',
-        background='#cad9d4'
     ).properties(
         # Properties and configuration need to be added.
         # Is the properties dictionary complete, including four keys and their
@@ -17,6 +16,7 @@ def chart(df: DataFrame, x: str, y: str, target: str) -> Chart:
         width=400,
         height=300,
         padding=10,
+        background='#cad9d4'
     ).mark_circle(size=100).encode(
         # Are the correct encodings used for x, y, color, and tooltip?
         x=X(f'{x}:Q', axis=Axis(title=x, grid=False)),
