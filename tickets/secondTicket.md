@@ -43,7 +43,7 @@ Stuck? Post in `labs-ds` or open a support ticket in the Hub!
 - [x] Is the function definition correct, including the correct parameters of a DataFrame, two strings for x and y, and a string for target? 
 - [ ] Is the properties dictionary complete, including four keys and their corresponding values for width, height, background, and padding? 
 - [ ] Is the Chart object created using the correct syntax and parameters, including the df, title, and mark_circle? Are the correct encodings used for x, y, color, and tooltip? Are the properties and configure dictionaries applied correctly using the correct syntax? 
-- [ ] Does the function return the correct object, a Chart?
+- [x] Does the function return the correct object, a Chart?
 - [ ] Does the code follow the PEP style guide?
 
 ### C. API Graph Integration
@@ -70,4 +70,4 @@ def chart(df: DataFrame, x: str, y: str, target: str) -> Chart:
     return graph
 
 ```
-Properties and configuration need to be added such that, the chart looks good on Bandersnatch. This is totally subjective, and in the end - you will be the judge.
+Properties and configuration need to be added such that the chart looks good on Bandersnatch. This is totally subjective, and in the end - you will be the judge.
