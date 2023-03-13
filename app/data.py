@@ -1,79 +1,60 @@
 from os import getenv
-
 from certifi import where
 from dotenv import load_dotenv
 from MonsterLab import Monster
 from pandas import DataFrame
 from pymongo import MongoClient
 
-# TO DO:
-# Connect to MongoDB
-# Update MongoDB database
-
 
 class Database:
-
-    load_dotenv()
-    database = MongoClient(getenv("MONGO_URL"), tlsCAFile=where())["Database"]
     """
     Initializes the Database using a dictionary
-    with which to make a MongoDB database, a DataFrame,
-    or an HTML table.
+    with which to perform CRUD operations on a MongoDB database,
+    or make a DataFrame or an HTML table.
     """
     def __init__(self, collection: str):
-        self.collection = self.database[collection]
-        self.rows = 0
-    # def __init__(self):
-    #     self.columns = [
-    #         'Name', 'Type', 'Level',
-    #         'Rarity', 'Damage', 'Health',
-    #         'Energy', 'Sanity', 'Timestamp'
-    #     ]
-    #     self.df = {column:[] for column in self.columns}
+        load_dotenv()
+        database = MongoClient(getenv("MONGO_URL"), tlsCAFile=where())["Database"]
+        self.collection = database[collection]
 
     """Inserts the specified number of documents, 'amount', into the collection."""
-    def seed(self, amount):
+    def seed(self, amount) -> None:
         for i in range(amount):
             monster = Monster()
-            self.collection.insert_one(
-                {
-                    'Name': monster.name, 'Type': monster.type,
-                    'Level': monster.level, 'Rarity': monster.rarity,
-                    'Damage': monster.damage, 'Health': monster.health,
-                    'Energy': monster.energy, 'Sanity': monster.sanity,
-                    'Timestamp': monster.timestamp
-                }
-            )
-            # self.df['Name'].append(monster.name)
-            # self.df['Type'].append(monster.type)
-            # self.df['Level'].append(monster.level)
-            # self.df['Rarity'].append(monster.rarity)
-            # self.df['Damage'].append(monster.damage)
-            # self.df['Health'].append(monster.health)
-            # self.df['Energy'].append(monster.energy)
-            # self.df['Sanity'].append(monster.sanity)
-            # self.df['Timestamp'].append(monster.timestamp)
+            self.collection.insert_one(document={
+                "name": monster.name, "type": monster.type,
+                "level": monster.level, "rarity": monster.rarity,
+                "damage": monster.damage, "health": monster.health,
+                "energy": monster.energy, "sanity": monster.sanity,
+                "timestamp": monster.timestamp
+            })
 
     """Deletes all documents in the collection."""
-    def reset(self):
-        # for key in self.df.keys():
-        #     self.df[key] = []
-        self.rows = 0
+    def reset(self) -> None:
+        self.collection.delete_many(filter={})
 
     """Returns the number of documents in the collection."""
     def count(self) -> int:
-        return self.rows
+        return self.collection.count_documents({})
 
     """Returns a pandas DataFrame representation of all the documents in the collection."""
     def dataframe(self) -> DataFrame:
-        # return DataFrame(data=self.df, columns=self.columns)
-        pass
+        rows = [
+                [
+                    row['name'], row['type'], row['level'],
+                    row['rarity'], row['damage'], row['health'],
+                    row['energy'], row['sanity'], row['timestamp']
+                ] for row in self.collection.find({})
+            ]
+        return DataFrame(
+            columns=[
+                'Name', 'Type', 'Level',
+                'Rarity', 'Damage', 'Health',
+                'Energy', 'Sanity', 'Timestamp'
+            ],
+            data=rows
+        )
 
     """Returns an HTML table representation of all the documents in the collection."""
     def html_table(self) -> str:
-        # return self.dataframe().to_html()
-        pass
-
-if __name__ == '__main__':
-    db = Database("Collection")
-    db.seed(100)
+        return self.dataframe().to_html()
