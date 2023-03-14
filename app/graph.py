@@ -1,6 +1,7 @@
 from altair import Chart, Tooltip, X, Y, Axis
 from pandas import DataFrame
 
+
 """
 Returns a chart displaying a scatter plot showing the
 relationship between 3 variables x, y, and target.
