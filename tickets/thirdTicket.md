@@ -69,4 +69,4 @@ class Machine:
 - [ ] Does `open()` properly load a saved machine learning model from the specified filepath using joblib?
 
 ### D. API Model Integration
-- [ ] Does `info()` return a string with the name of the base model and the timestamp of when it was initialized?
+- [x] Does `info()` return a string with the name of the base model and the timestamp of when it was initialized?
