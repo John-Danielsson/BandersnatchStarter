@@ -20,7 +20,7 @@ def chart(df: DataFrame, x: str, y: str, target: str) -> Chart:
         width=400,
         height=300,
         padding=10,
-        background='#ffffff'
+        background='#000000'
     ).mark_circle(size=100).encode(
         x=X(f'{x}:Q', axis=Axis(title=x, grid=False)),
         y=Y(f'{y}:Q', axis=Axis(title=y, grid=False)),
@@ -28,5 +28,13 @@ def chart(df: DataFrame, x: str, y: str, target: str) -> Chart:
         tooltip=Tooltip(df.columns.to_list())
     ).configure_view(
         strokeWidth=2,
-        stroke='#000000'
+        stroke='#c0ebde'
+    ).configure_axis(
+        labelColor='#c0ebde',
+        titleColor='#c0ebde'
+    ).configure_legend(
+        labelColor='#c0ebde',
+        titleColor='#c0ebde'
+    ).configure_title(
+        color='#c0ebde'
     )
