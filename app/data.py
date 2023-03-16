@@ -58,3 +58,7 @@ class Database:
     """Returns an HTML table representation of all the documents in the collection."""
     def html_table(self) -> str:
         return self.dataframe().to_html()
+
+    """Saves the current data as a .csv file."""
+    def save(self) -> None:
+        self.dataframe().to_csv('bandersnatch_data.csv')
