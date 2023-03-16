@@ -62,7 +62,7 @@ class Database:
         return self.dataframe().to_html()
 
     """Saves the current data as a .csv file."""
-    def save(self) -> None:
+    def save_as_csv(self) -> None:
         self.version += 1
         self.dataframe().to_csv(
             path_or_buf=f'bandersnatch_data_{self.version}.csv'
