@@ -16,6 +16,7 @@ class Database:
         load_dotenv()
         database = MongoClient(getenv("MONGO_URL"), tlsCAFile=where())["Database"]
         self.collection = database[collection]
+        self.version = 0
 
     """Inserts the specified number of documents, 'amount', into the collection."""
     def seed(self, amount) -> None:
@@ -61,4 +62,7 @@ class Database:
 
     """Saves the current data as a .csv file."""
     def save(self) -> None:
-        self.dataframe().to_csv('bandersnatch_data.csv')
+        self.version += 1
+        self.dataframe().to_csv(
+            path_or_buf=f'bandersnatch_data_{self.version}.csv'
+        )
