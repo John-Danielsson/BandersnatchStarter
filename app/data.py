@@ -11,6 +11,7 @@ class Database:
     Initializes the Database using a dictionary
     with which to perform CRUD operations on a MongoDB database,
     or make a DataFrame or an HTML table.
+    Starting argument is "Collection".
     """
     def __init__(self, collection: str):
         load_dotenv()
