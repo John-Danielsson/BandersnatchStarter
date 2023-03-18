@@ -32,7 +32,7 @@ Submit the following in your course:
 ### A. Notebook Model Training & Tuning
 - [x] Create a notebook for model testing and tuning
 - [x] Train and tune at least 3 models using the data generated in an earlier Sprint
-- [ ] Measure the accuracy of the models and report info about your best model 
+- [x] Measure the accuracy of the models and report info about your best model 
 - [ ] Write a paragraph or two about your best model
 
 ### B. Machine Learning Interface Class
