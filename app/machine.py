@@ -53,7 +53,8 @@ class Machine:
     # Does the call function take in a DataFrame of feature data and
     # return a prediction and the probability of the prediction?
     def __call__(self, feature_basis: DataFrame):
-        return self.model.predict(pred_basis)
+        prediction, *_ = self.model.predict(pred_basis)
+        return prediction
 
     # Does `save()` properly save the machine learning model
     # to the specified filepath using joblib?
