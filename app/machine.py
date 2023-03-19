@@ -1,6 +1,7 @@
 # from sklearn.ensemble import RandomForestClassifier
 # from sklearn.tree import DecisionTreeClassifier
 from sklearn.gaussian_process import GaussianProcessClassifier
+from sklearn.gaussian_process.kernels import RBF
 from pandas import DataFrame
 from datetime import datetime
 from joblib import load, dump
@@ -26,7 +27,7 @@ class Machine:
         #     min_samples_leaf=1,
         #     max_features='sqrt',
         #     bootstrap=True,
-        #     random_state=random_state
+        #     random_state=4
         # )
         # self.model = DecisionTreeClassifier(
         #     criterion='entropy',
@@ -35,11 +36,11 @@ class Machine:
         #     min_samples_leaf=1,
         #     max_features='sqrt',
         #     max_depth=19,
-        #     random_state=random_state
+        #     random_state=4
         # )
         self.model = GaussianProcessClassifier(
             kernel=1.0 * RBF(1.0),
-            random_state=random_state,
+            random_state=4,
             warm_start=False,
             multi_class='one_vs_one',
             max_iter_predict=300,
@@ -65,10 +66,9 @@ class Machine:
     # from the specified filepath using joblib?
     @staticmethod
     def open(filepath):
-        model = load(filepath)
-        obj = cls.__new__(cls)
-        obj.model = model
-        return obj
+        machine = Machine()
+        machine.model = load(filepath)
+        return machine
 
     # Does `info()` return a string with the name of the base model
     # and the timestamp of when it was initialized?
