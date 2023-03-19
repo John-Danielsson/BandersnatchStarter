@@ -1,12 +1,6 @@
-from sklearn.ensemble import RandomForestClassifier
+# from sklearn.ensemble import RandomForestClassifier
 # from sklearn.tree import DecisionTreeClassifier
-# from sklearn.gaussian_process import GaussianProcessClassifier
-# from sklearn.gaussian_process.kernels import RBF
-# from sklearn.model_selection import (
-#     train_test_split, RandomizedSearchCV, GridSearchCV
-# )
-# from scipy.stats import uniform
-# import pandas as pd
+from sklearn.gaussian_process import GaussianProcessClassifier
 from pandas import DataFrame
 from datetime import datetime
 from joblib import load, dump
@@ -22,20 +16,43 @@ class Machine:
     # Does the __init__ function properly initialize the
     # machine learning model and store it as an attribute?
     def __init__(self, df: DataFrame):
-        self.name = "Random Forest Classifier"
-        self.target = df['Rarity']
-        self.features = df.drop(columns=['Rarity'])
-        self.model = RandomForestClassifier()
+        # self.name = "Random Forest Classifier"
+        # self.name = "Decision Tree Classifier"
+        self.name = "Gaussian Process Classifier"
+        # self.model = RandomForestClassifier(
+        #     n_estimators=350,
+        #     max_depth=19,
+        #     min_samples_split=5,
+        #     min_samples_leaf=1,
+        #     max_features='sqrt',
+        #     bootstrap=True,
+        #     random_state=random_state
+        # )
+        # self.model = DecisionTreeClassifier(
+        #     criterion='entropy',
+        #     splitter='best',
+        #     min_samples_split=5,
+        #     min_samples_leaf=1,
+        #     max_features='sqrt',
+        #     max_depth=19,
+        #     random_state=random_state
+        # )
+        self.model = GaussianProcessClassifier(
+            kernel=1.0 * RBF(1.0),
+            random_state=random_state,
+            warm_start=False,
+            multi_class='one_vs_one',
+            max_iter_predict=300,
+            n_jobs=-1
+        )
+        features = df.drop(columns=['Rarity'])
+        target = df['Rarity']
         self.model.fit(features, target)
         self.timestamp = '%s' % datetime.now()
 
     # Does the call function take in a DataFrame of feature data and
     # return a prediction and the probability of the prediction?
     def __call__(self, feature_basis: DataFrame):
-        # prediction = self.model.predict(pred_basis)
-        # prediction, *_ = self.model.predict(feature_basis)
-        # print('prediction', type(prediction))
-        # return prediction
         return self.model.predict(pred_basis)
 
     # Does `save()` properly save the machine learning model
@@ -57,7 +74,6 @@ class Machine:
     def info(self):
         return f'{self.name}, initialized {self.timestamp}'
 
-
-# if __name__ == '__main__':
-#     machine = Machine(DataFrame({'Rarity': [0], 'Health': [0]}))
-#     print(machine.info())
+if __name__ == '__main__':
+    machine = Machine(DataFrame({'Rarity': [0], 'Health': [0]}))
+    print(machine.info())
