@@ -68,7 +68,3 @@ class Machine:
     when the model was initialized."""
     def info(self):
         return f'{self.name}, initialized {self.timestamp}'
-
-if __name__ == "__main__":
-    machine = Machine(read_csv("bandersnatch_data_1.csv"))
-    machine.save("app/gaussian_process_classifier.joblib")
