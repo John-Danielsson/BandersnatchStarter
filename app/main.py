@@ -84,10 +84,10 @@ def model():
         [dict(zip(options, (level, health, energy, sanity)))]
     ))
     info = machine.info()
-    print('prediction')
-    print(prediction)
-    print('confidence')
-    print(confidence)
+    # print('prediction')
+    # print(prediction)
+    # print('confidence')
+    # print(confidence)
     return render_template(
         "model.html",
         info=info,
