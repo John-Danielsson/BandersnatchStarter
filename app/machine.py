@@ -60,8 +60,8 @@ class Machine:
     # Does the call function take in a DataFrame of feature data and
     # return a prediction and the probability of the prediction?
     def __call__(self, prediction_features: DataFrame):
-        prediction = self.model["model"].predict(prediction_features)
-        probability = max(self.model["model"].predict_proba(prediction_features))
+        prediction = self.model.predict(prediction_features)
+        probability = max(self.model.predict_proba(prediction_features))
         return prediction, probability
         # return self.model["model"].predict(prediction_features)
 
